@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>one.jkr.de.jkrsoftware.entity.locking.libraries</groupId>
+    <artifactId>InMemoryStore-Locking-Library</artifactId>
+    <version>SNAPSHOT</version>
+    <name>InMemoryStore-Locking-Library</name>
+    <description>Java-Library for Entity-Locking via an InMemory-Store.</description>
+
+    <properties>
+        <java.version>11</java.version>
+        <junit.engine.version>5.8.1</junit.engine.version>
+        <junit.platform.version>1.8.1</junit.platform.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.engine.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Start of: "Generic Locking-Library" -->
+        <dependency>
+            <groupId>one.jkr.de.jkrsoftware.entity.locking.libraries</groupId>
+            <artifactId>Generic-Locking-Library</artifactId>
+            <version>2021-12-13_22-50_bba1419</version>
+        </dependency>
+        <!-- End of: "Generic Locking-Library" -->
+
+        <!-- Start of: "Other Dependencies" -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.6</version>
+        </dependency>
+        <!-- End of: "Other Dependencies" -->
+
+        <!-- Start of: "Dependencies for Testing." -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.21.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- End of: "Dependencies for Testing." -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

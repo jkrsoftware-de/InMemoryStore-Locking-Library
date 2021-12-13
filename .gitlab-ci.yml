@@ -1,0 +1,86 @@
+###### 🌏 ###### 💬 ######
+# All my public-accessible Software-Content aren't underlying any Software-License. It's Free-Software.
+# You can use my Code as you want — my only Wish is: mark me as Original-Creator of your Derivation. But you mustn't. :)
+#
+# My Intention of creating/publishing Free-Software is to help our Public Society.
+# In this particular Case our newly-created "Computer-World". I mean everything regarding complex IT-Systems.
+#
+# made for jkrsoftware.de as Versioning- and Deployment-System.
+# made with ❤ by Jeremy Krüger (jkr.one). 😊
+###### 🌏 ###### 💬 ######
+## Global-Config.
+services:
+  - docker:dind
+
+stages:
+  - build-stage
+  - version-creation-stage
+  - version-deployment-stage
+
+variables:
+  DOCKER_TLS_CERTDIR: ''
+  DOCKER_DRIVER: overlay2
+  SPRING_PROFILES_ACTIVE: gitlab-ci
+  GIT_SUBMODULE_STRATEGY: recursive
+
+## Pipeline-Jobs.
+
+### Build the Software-Project.
+Build the Application:
+  image: maven:3.8-openjdk-11-slim
+  stage: build-stage
+  allow_failure: false
+  cache:
+    paths:
+      - '.m2/'
+  script: 'mvn clean package -B'
+
+### Run Tests of the Software-Project.
+Run Tests of the Application:
+  image: maven:3.8-openjdk-11-slim
+  stage: build-stage
+  allow_failure: false
+  cache:
+    paths:
+      - '.m2/'
+  script: 'mvn clean test verify -Dgpg.skip'
+
+### Version-Creation.
+create new Version of the Software-Project:
+  image: maven:3.8-openjdk-11-slim
+  stage: version-creation-stage
+  allow_failure: false
+  when: manual
+  only:
+    - /^main$/
+  before_script:
+    - apt update -y && apt install ssh git -y
+  script:
+    - versioning-and-deployment-system/create-version/create-new-version.sh "${GIT_REPOSITORY_URL_WITH_CREDENTIALS}"
+
+### Version-Deployment (to Sonatype Maven-Central via Maven).
+deploy to Sonatype Maven-Central via Maven:
+  image: maven:3.8-openjdk-11-slim
+  stage: version-deployment-stage
+  allow_failure: false
+  when: manual
+  only:
+    - /^release/
+  before_script:
+    - apt update -y && apt install ssh git gnupg2 -y
+  script:
+    - gpg --import ${GPG_PRIVATE_KEY_FILE}
+    - versioning-and-deployment-system/deploy-version/deploy-new-version.sh 'MAVEN_DEPLOYMENT' "${M2_SETTINGS_FILE}"
+
+### Version-Deployment (to GitHub.).
+deploy to GitHub.:
+  image: maven:3.8-openjdk-11-slim
+  stage: version-deployment-stage
+  allow_failure: false
+  when: manual
+  only:
+    - /^release/
+  before_script:
+    - apt update -y && apt install ssh git -y
+  script:
+    - versioning-and-deployment-system/deploy-version/deploy-new-version.sh 'GIT_DEPLOYMENT' "${GITHUB_REPOSITORY_URL_WITH_CREDENTIALS}" 'main'

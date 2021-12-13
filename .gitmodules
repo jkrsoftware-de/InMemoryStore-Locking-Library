@@ -1,0 +1,3 @@
+[submodule "versioning-and-deployment-system-github"]
+	path = versioning-and-deployment-system
+	url = https://github.com/jkrsoftware-de/Versioning-and-Deployment-System.git
