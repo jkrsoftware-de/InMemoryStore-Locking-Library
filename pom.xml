@@ -10,7 +10,7 @@
     </parent>
     <groupId>one.jkr.de.jkrsoftware.entity.locking.libraries</groupId>
     <artifactId>InMemoryStore-Locking-Library</artifactId>
-    <version>SNAPSHOT</version>
+    <version>2021-12-14_01-20_dcedc3d</version>
     <name>InMemoryStore-Locking-Library</name>
     <description>Java-Library for Entity-Locking via an InMemory-Store.</description>
 
