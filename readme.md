@@ -43,6 +43,16 @@ Plattform — as Part of the **jkrsoftware Promise, to keep every Software-Proje
 
 ---
 
+### ➜ lock and unlock your Entities, validate existing Locks and check, if an Entity is currently locked.
+
+You can speak to the Locking-System Adapter, to use this Library.<br />
+
+Further Informations you can gather
+there: [InMemoryStoreLockingSystemAdapter](https://github.com/jkrsoftware-de/InMemoryStore-Locking-Library/blob/main/src/main/java/one/jkr/de/jkrsoftware/entity/locking/libraries/inmemorystore/locking/library/locking/system/adapters/in/InMemoryStoreLockingSystemAdapter.java)
+.
+
+---
+
 ## 📙 About the „Entity Locking“-Libraries.
 
 I'm developing the Entity Locking-Libraries, cause in many of my current (and future) Software-Products, I need an easy Way to lock
