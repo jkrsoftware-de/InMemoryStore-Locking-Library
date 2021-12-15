@@ -3,11 +3,11 @@ package one.jkr.de.jkrsoftware.entity.locking.libraries.inmemorystore.locking.li
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.application.port.out.LockPort;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.LockIdentifier;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.entity.lock.EntityLock;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.entity.lock.EntityLockId;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.request.LockRequest;
+import one.jkr.de.jkrsoftware.entity.locking.libraries.inmemorystore.locking.library.locking.system.application.ports.out.LockPortForInMemoryStore;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;
@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @Slf4j
-public class InMemoryStoreLockPersistor implements LockPort {
+public class InMemoryStoreLockPersistor implements LockPortForInMemoryStore {
 
     private static final String LOG_PREFIX = "[In-Memory Lock Persistor]: ";
 
@@ -26,6 +26,10 @@ public class InMemoryStoreLockPersistor implements LockPort {
 
     @NonNull
     private final Clock clock;
+
+    public InMemoryStoreLockPersistor() {
+        this.clock = Clock.systemUTC();
+    }
 
     @Override
     public Optional<EntityLock> lock(@NonNull LockRequest lockRequest) {

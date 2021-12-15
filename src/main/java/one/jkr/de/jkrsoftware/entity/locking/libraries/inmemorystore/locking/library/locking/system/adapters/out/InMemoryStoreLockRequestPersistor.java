@@ -3,12 +3,12 @@ package one.jkr.de.jkrsoftware.entity.locking.libraries.inmemorystore.locking.li
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.application.port.out.LockRequestPort;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.LockIdentifier;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.request.LockRequest;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.request.LockRequestId;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.timeout.strategy.LockTimeoutStrategy;
 import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.locking.system.domain.lock.timeout.strategy.TimebasedLockTimeoutStrategy;
+import one.jkr.de.jkrsoftware.entity.locking.libraries.inmemorystore.locking.library.locking.system.application.ports.out.LockRequestPortForInMemoryStore;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @RequiredArgsConstructor
 @Slf4j
-public class InMemoryStoreLockRequestPersistor implements LockRequestPort {
+public class InMemoryStoreLockRequestPersistor implements LockRequestPortForInMemoryStore {
 
     private static final String LOG_PREFIX = "[In-Memory Lock-Request Persistor]: ";
 
@@ -30,6 +30,11 @@ public class InMemoryStoreLockRequestPersistor implements LockRequestPort {
 
     @NonNull
     private final Clock clock;
+
+    public InMemoryStoreLockRequestPersistor(long pollingRateOnLockRequestQueue) {
+        this.pollingRateOnLockRequestQueue = pollingRateOnLockRequestQueue;
+        this.clock = Clock.systemUTC();
+    }
 
     @Override
     public LockRequest submitLockRequest(@NonNull LockIdentifier lockIdentifier) {

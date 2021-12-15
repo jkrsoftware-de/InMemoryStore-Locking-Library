@@ -13,7 +13,6 @@ import one.jkr.de.jkrsoftware.entity.locking.libraries.generic.locking.library.l
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.Clock;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
@@ -21,9 +20,7 @@ import java.util.concurrent.CompletableFuture;
 
 class InMemoryStoreLockingSystemAdapterIntegrationTest {
 
-    private final Clock clock = Clock.systemUTC();
-
-    private final InMemoryStoreLockingSystemAdapter uut = new InMemoryStoreLockingSystemAdapter(clock, 500L);
+    private final InMemoryStoreLockingSystemAdapter uut = new InMemoryStoreLockingSystemAdapter(500L);
 
     @Test
     void getCurrentEntityLock() {
