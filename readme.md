@@ -9,6 +9,8 @@ project is developed by [jkrsoftware.de](https://www.jkrsoftware.de).
 [![last commit on main-branch](https://badgen.net/github/last-commit/jkrsoftware-de/InMemoryStore-Locking-Library/main)](https://github.com/jkrsoftware-de/InMemoryStore-Locking-Library/commit/main)
 [![current watchers](https://badgen.net/github/watchers/jkrsoftware-de/InMemoryStore-Locking-Library)](https://github.com/jkrsoftware-de/InMemoryStore-Locking-Library/watchers)
 [![given stars](https://badgen.net/github/stars/jkrsoftware-de/InMemoryStore-Locking-Library)](https://github.com/jkrsoftware-de/InMemoryStore-Locking-Library/stargazers)
+<br />
+(_Sometimes the Badges are broken, please reload the Page then — i'll switch to another Batch-Provider soon._)
 
 ---
 
